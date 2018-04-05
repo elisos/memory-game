@@ -1,3 +1,9 @@
+/* Custom CSS Stylesheet */
+
+/*** *** *** *** *** *** Page: Index *** *** *** *** *** ***/
+
+/*--GENERAL--*/
+
 html {
     box-sizing: border-box;
 }
@@ -17,9 +23,10 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png');
-    /* Background pattern from Subtle Patterns */
+    /*background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
+    background-color: #4ee0d1;
     font-family: 'Coda', cursive;
+    color: #2e3d49;
 }
 
 .container {
@@ -30,69 +37,17 @@ body {
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-family: ;
+    font-size: 3em;
 }
 
-/*
- * Styles for the deck of cards
- */
+/***--- --- --- SCORE PANEL --- --- ---***/
 
-.deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 0 3em;
-}
-
-.deck .deck-card {
-    height: 125px;
-    width: 125px;
-    background: #2e3d49;
-    font-size: 0;
-    color: #ffffff;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-}
-
-.deck .deck-card.open {
-    transform: rotateY(0);
-    background: #02b3e4;
-    cursor: default;
-}
-
-.deck .deck-card.show {
-    font-size: 33px;
-}
-
-.deck .deck-card.match {
-    cursor: default;
-    background: #02ccba;
-    font-size: 33px;
-}
-
-/*
- * Styles for the Score Panel
- */
-#levels-modal{
-    align-items: center;
-    justify-content: center;
-}
 .score-panel {
-    text-align: left;
-    width: 345px;
+    width: 600px;
     margin-bottom: 10px;
+    display: grid;
+    grid-template-columns:
 }
 
 .score-panel .stars {
@@ -100,6 +55,7 @@ h1 {
     padding: 0;
     display: inline-block;
     margin: 0 5px 0 0;
+    color: #ff0;
 }
 
 .score-panel .stars li {
@@ -111,3 +67,99 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+/***--- --- --- DECK (cards container) --- --- ---***/
+
+.deck {
+    margin: 0 auto;
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/***--- --- --- CARDS --- --- ---***/
+
+.card {
+    background: #2e3d49;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all .4s linear;
+    transform-style: preserve-3d;
+    margin: 5px;
+}
+
+/*
+.back -> side with image
+.front -> siide without image
+*/
+
+.card,
+.back,
+.front {
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+.back,
+.front {
+    position: absolute;
+    backface-visibility: hidden;
+}
+
+.front {
+    transform: rotateY(0);
+    cursor: default;
+    border-radius: 10px;
+    z-index: 2;
+
+}
+
+.back {
+    transform: rotateY(180deg);
+    background: #02b3e4;
+    cursor: default;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.show {
+
+    pointer-events: none;
+
+}
+
+.selected {
+    transform: rotateY(180deg);
+}
+
+.match {
+    cursor: default;
+    background: #02ccba;
+    pointer-events: none;
+    border-radius: 10px;
+    !important;
+}
+
+.notmatch {
+    background: #f95c3d;
+}
+
+/********/
+
+/*THE ᕕ( ᐛ )ᕗ END*/
+
+/********/
