@@ -77,9 +77,13 @@ $(document).ready(function () {
     const deck = $('<ul></ul>').addClass('deck');
     game.append(deck);
 
+    let selectedCards = []; //array to hold selected cards per turn
 
 
-
+    let firstPick = '';
+    let secondPick = '';
+    let count = 0;
+    let previousTarget = null;
 
 
     /* *** *** *** FUNCTIONS *** *** *** */
@@ -100,9 +104,12 @@ $(document).ready(function () {
         return array;
     }
 
-    // display cards function - by iterating over cards array; creates .card list element and attaches it to deck
+    // display cards function - by iterating over cards array; creates .card li element and attaches it to .deck ul element
     const displayCards = function () {
+
+        //before game starts shuffle the cards
         shuffle(cards);
+
         for (const item of cards) {
             const {
                 name,
@@ -122,11 +129,74 @@ $(document).ready(function () {
             card.append(back);
         }
     };
+    const match = function () {
+        const selected = document.querySelectorAll('.selected');
+        selected.forEach(card => {
+            card.classList.add('match');
+        });
+    };
+    const resetPicks = function () {
+        firstPick = '';
+        secondPick = '';
+        count = 0;
+        previousTarget = 0;
 
-    const play = function () {
-        displayCards();
+        let selected = document.querySelectorAll('.selected');
+        selected.forEach(card => {
+            card.classList.remove('selected');
+        });
     };
 
+    const play = function () {
+        //resets all the previous moves and empties deck
+        deck.empty();
+
+
+        //before game starts shuffle the cards
+        shuffle(cards);
+
+        displayCards();
+
+    };
+
+    /* *** *** *** EVENT LISTENERS*** *** *** */
+    //Event listener -> on click flip the card
+    deck.on('click', event => {
+
+        const clicked = event.target;
+
+        if (
+            clicked.nodeName === 'UL' ||
+            clicked === previousTarget ||
+            clicked.parentNode.classList.contains('selected')
+        ) {
+            return;
+        }
+
+        if (count < 2) {
+            count++;
+            if (count === 1) {
+                firstPick = clicked.parentNode.dataset.name;
+                console.log(firstPick);
+                clicked.parentNode.classList.add('selected');
+            } else {
+                secondPick = clicked.parentNode.dataset.name;
+                console.log(secondPick);
+                clicked.parentNode.classList.add('selected');
+            }
+
+            if (firstPick && secondPick) {
+                if (firstPick === secondPick) {
+                    setTimeout(match, 1200);
+                }
+                setTimeout(resetPicks, 1200);
+            }
+            previousTarget = clicked;
+        }
+
+    });
+
+    /* *** *** *** CALLING FUNCTIONS *** *** *** */
     play();
 
 
