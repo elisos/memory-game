@@ -1,16 +1,16 @@
 /*jQuery*/
 $(document).ready(function () {
+
+    /* *** *** *** VARIABLES *** *** *** */
+
     // Element with ID game -> save as variable
     const game = $('#game');
 
-    // Element with class deck -> save as variable
-    const deck = $('.deck');
 
-    // Array which holds cards images
-    let cards = [
-        {
+    // Array which holds cards with unique images -> half of deck
+    const cardsUnique = [{
             'name': 'baever',
-            'img': 'img\baever.svg',
+            'img': 'img/baever.svg',
   },
         {
             'name': 'cat',
@@ -42,7 +42,7 @@ $(document).ready(function () {
   },
         {
             'name': 'lion',
-            'img': 'img\lion.svg',
+            'img': 'img/lion.svg',
   },
         {
             'name': 'monkey',
@@ -69,48 +69,67 @@ $(document).ready(function () {
             'img': 'img/zebra.svg',
   },
 ];
-    //intialize modal
-    $(document).ready(function () {
-        $('.modal').modal();
-    });
 
-    //Easy mode
-    $("#pick-easy").on("click", function () {
-        let cardsEasy = cards[0, 1, 2, 3];
-        let deckEasy = cardsEasy.concat(cardsEasy);
+    //creating pairs by duplicating card array
+    const cards = cardsUnique
+        .concat(cardsUnique);
 
-        deckEasy.forEach(item => {
-            // Create a div
-            const card = document.createElement('div');
+    const deck = $('<ul></ul>').addClass('deck');
+    game.append(deck);
 
-            // Apply a card class to that div
 
-            card.classList.add('deck-card');
-            card.classList.add('show');
 
-            // Set the data-name attribute of the div to the cardsArray name
-            card.dataset.name = item.name;
 
-            // Apply the background image of the div to the cardsArray image
-            card.style.backgroundImage = `url(${item.img})`;
 
-            // Append the div to the grid section
+
+    /* *** *** *** FUNCTIONS *** *** *** */
+
+    //Shuffle function from http://stackoverflow.com/a/2450976
+    function shuffle(array) {
+        let currentIndex = array.length,
+            temporaryValue, randomIndex;
+
+        while (0 !== currentIndex) {
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
+        }
+
+        return array;
+    }
+
+    // display cards function - by iterating over cards array; creates .card list element and attaches it to deck
+    const displayCards = function () {
+        shuffle(cards);
+        for (const item of cards) {
+            const {
+                name,
+                img
+            } = item;
+
+            const card = $('<li></li>').addClass('card');
+            card.attr('data-name', item.name);
+
+            const front = $('<div></div>').addClass('front');
+            const back = $('<div></div>').addClass('back');
+            let imageUrl = `url(${img})`;
+            back.css('background-image', imageUrl);
+
             deck.append(card);
-});
+            card.append(front);
+            card.append(back);
+        }
+    };
+
+    const play = function () {
+        displayCards();
+    };
+
+    play();
 
 
-    });
-    //Medium mode
-    $("#pick-hard").on("click", function () {
-
-
-    });
-
-    //Hard mode
-    $("#pick-hard").on("click", function () {
-
-
-    });
 }); // end jQuery
 
 
