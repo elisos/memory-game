@@ -139,7 +139,12 @@ h1 {
 .show {
 
     pointer-events: none;
+}
 
+.open {
+
+    background: #02b3e4;
+    cursor: default;
 }
 
 .selected {
@@ -154,7 +159,7 @@ h1 {
     !important;
 }
 
-.notmatch {
+.nonmatch {
     background: #f95c3d;
 }
 
