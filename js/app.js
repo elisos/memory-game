@@ -220,6 +220,33 @@ function removeMatch() {
 }
 
 
+/* *** *** TIMER *** *** */
+let totalTime = 0;
+
+
+const time = document.querySelector(".time");
+let minutes = document.querySelector(".minutes");
+let seconds = document.querySelector(".seconds");
+let timer;
+
+function startTimer() {
+    timer = setInterval(function () {
+        seconds.innerText++;
+        if (seconds.innerText == 60) {
+            minutes.innerText++;
+            seconds.innerText = 0;
+        }
+    }, (1000));
+    return timer;
+}
+
+function stopTimer() {
+    clearInterval(timer);
+}
+
+
+
+
 /* *** *** *** Instructions *** *** *** */
 
 
