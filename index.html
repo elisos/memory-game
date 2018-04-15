@@ -15,6 +15,9 @@
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css'>
     <!--My CSS-->
     <link rel="stylesheet" href="css/app.css">
+    <!--References
+    Unicorn image: https://cdn.dribbble.com/users/355650/screenshots/2181500/unicorn_drib_v2.gif
+    -->
 </head>
 
 <body>
@@ -37,9 +40,9 @@
             <div class="time">
                 <span class="minutes">00</span> m : <span class="seconds">00</span> s
             </div>
-            <div class="restart">
+            <button id="restart">
                 <i class="fa fa-repeat"></i>
-            </div>
+            </button>
         </section>
         <ul class="deck">
             <li class="card">
@@ -134,25 +137,16 @@
             </li>
 
         </ul>
-        <div id="modalWrapper" class="modal">
-            <div class="modal-content">
-                <h1>Congratulations!</h1>
-                <p>You have finished the game with <span id="movesResult">0</span> Moves and <span id="starsResult">0</span> Star.</p>
-                <p>Your time: <span id="finalTime">00</span></p>
-                <div id="replay">
-                    <i class="fa fa-repeat"></i>
-                </div>
-            </div>
-        </div>
+
     </div>
     <!--Scripts-->
 
-    <!-- jQuery plugin
+    <!-- jQuery plugin-->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 
 
-    </script>-->
+    </script>
     <!-- Script for Bootstrap Sweetalert -->
     <script src='https://cdn.jsdelivr.net/npm/sweetalert'></script>
 

@@ -155,10 +155,14 @@ deck.addEventListener('click', function play(clicked) {
         if (openCards.length == 2) {
             checkIfMatch();
             starRating();
+            countPairs();
             setTimeout(resetCards, 1200);
         }
         if (pairs.length === 15) {
-            openModal();
+            let score = starRating(moveCount).score;
+            setTimeout(function () {
+                endGame(moveCount, score);
+            }, 500);
         }
     }
 })
@@ -183,9 +187,9 @@ function checkIfMatch() {
 
 function match() {
 
-    let firstToPairs = firstCard.className += " match";
+    let firstToPairs = firstCard.classList.add("match");
     pairs.push(firstToPairs);
-    let secondToPairs = secondCard.className += " match";
+    let secondToPairs = secondCard.classList.add("match");
     pairs.push(secondToPairs);
     openCards = [];
     clicks = 0;
@@ -242,13 +246,12 @@ function stopTimer() {
     clearInterval(timer);
 }
 
+
 /* *** *** STAR RATING & MOVE COUNTER *** *** */
 
 const moves = document.querySelector(".moves"); // span elemet which displays number of moves
 let moveCount = 0;
-const star = document.querySelectorAll('.fa-star'); // star -represents rating
-
-
+const star = document.querySelectorAll(".fa-star"); // star -represents rating
 
 function starRating() {
     //update moves
@@ -259,13 +262,18 @@ function starRating() {
         startTimer();
     }
     //rate game based on move count
+    let rating = 3;
     if (moveCount == 20) {
         star[2].classList.remove("fa-star");
         star[2].classList.add("fa-star-o");
-
+        rating = 2;
     } else if (moveCount == 30) {
         star[1].classList.remove("fa-star");
         star[1].classList.add("fa-star-o");
+        rating = 1;
+    }
+    return {
+        score: rating
     }
 }
 
@@ -277,10 +285,14 @@ function resetStarRating() {
 }
 
 
+/* *** *** PAIRS COUNT *** *** */
+const pairsNo = document.querySelector(".pairs"); // span elemet which displays number of pairs
 
-
-
-
+function countPairs() {
+    //update pairs
+    let pairsCount = pairs.length / 2;
+    pairsNo.innerText = pairsCount;
+}
 
 
 /* *** *** *** Instructions *** *** *** */
