@@ -295,6 +295,33 @@ function countPairs() {
 }
 
 
+/* *** *** END GAME MODAL *** *** */
+
+function endGame(moveCount, score) {
+    stopTimer(timer);
+
+    swal({
+        closeOnEsc: true,
+        closeOnClickOutside: true,
+        title: "Game Won!",
+        text: `Moves:  ${movesCount}
+                Game rating : ${score}
+                Time : ${minutes} : ${seconds}`,
+        icon: "success",
+        buttons: {
+            playAgain: {
+                text: "Play again?"
+            }
+        }
+    }).then(function (isConfirm) {
+        if (isConfirm) {
+            firstClick = false;
+            gamePlay();
+        }
+    })
+}
+
+
 /* *** *** *** Instructions *** *** *** */
 
 
