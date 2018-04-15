@@ -307,12 +307,12 @@ function endGame(moveCount, score) {
         text: `Moves:  ${movesCount}
                 Game rating : ${score}
                 Time : ${minutes} : ${seconds}`,
-        icon: "success",
-        buttons: {
+        imageUrl: "img/unicorn.gif",
+        button: {
             playAgain: {
                 text: "Play again?"
             }
-        }
+        },
     }).then(function (isConfirm) {
         if (isConfirm) {
             firstClick = false;
@@ -320,6 +320,31 @@ function endGame(moveCount, score) {
         }
     })
 }
+
+/* *** *** RESTART GAME *** *** */
+let restart = document.getElementById("restart");
+
+restart.addEventListener("click", restartGame());
+
+function restartGame() {
+    swal({
+        closeOnEsc: true,
+        closeOnClickOutside: true,
+        title: "Are you sure you  want to start over ?",
+        text: "Your progress will be lost!",
+        icon: "warning",
+        dangerMode: true,
+        buttons: true
+    }).then(function (isConfirm) {
+        if (isConfirm) {
+            stopTimer(timer);
+            openCards = [];
+            clicks = 0;
+            play(clicked);
+        }
+    })
+}
+
 
 
 /* *** *** *** Instructions *** *** *** */
