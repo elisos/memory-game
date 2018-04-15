@@ -154,7 +154,7 @@ deck.addEventListener('click', function play(clicked) {
 
         if (openCards.length == 2) {
             checkIfMatch();
-
+            starRating();
             setTimeout(resetCards, 1200);
         }
         if (pairs.length === 15) {
@@ -199,7 +199,6 @@ function unmatch() {
     secondCard.classList.remove("open", "show");
     openCards = [];
     clicks = 0;
-
 }
 
 /* *** *** RESET  CARDS*** *** */
@@ -215,19 +214,18 @@ function resetCards() {
 //removes all classes with open show match
 function removeMatch() {
     for (i = 0; i < cards.length; i++) {
-        card[i].classList.remove('open', 'show', 'match');
+        card[i].classList.remove("open", "show", "match");
     }
 }
 
 
 /* *** *** TIMER *** *** */
-let totalTime = 0;
-
 
 const time = document.querySelector(".time");
 let minutes = document.querySelector(".minutes");
 let seconds = document.querySelector(".seconds");
 let timer;
+let totalTime = 0;
 
 function startTimer() {
     timer = setInterval(function () {
@@ -243,6 +241,44 @@ function startTimer() {
 function stopTimer() {
     clearInterval(timer);
 }
+
+/* *** *** STAR RATING & MOVE COUNTER *** *** */
+
+const moves = document.querySelector(".moves"); // span elemet which displays number of moves
+let moveCount = 0;
+const star = document.querySelectorAll('.fa-star'); // star -represents rating
+
+
+
+function starRating() {
+    //update moves
+    moveCount++;
+    moves.innerText = moveCount;
+    //start timer on first click
+    if (moveCount == 1) {
+        startTimer();
+    }
+    //rate game based on move count
+    if (moveCount == 20) {
+        star[2].classList.remove("fa-star");
+        star[2].classList.add("fa-star-o");
+
+    } else if (moveCount == 30) {
+        star[1].classList.remove("fa-star");
+        star[1].classList.add("fa-star-o");
+    }
+}
+
+function resetStarRating() {
+    star[1].classList.remove("fa-star-o");
+    star[1].classList.add("fa-star");
+    star[2].classList.remove("fa-star-o");
+    star[2].classList.add("fa-star");
+}
+
+
+
+
 
 
 
