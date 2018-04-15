@@ -154,7 +154,7 @@ deck.addEventListener('click', function play(clicked) {
 
         if (openCards.length == 2) {
             checkIfMatch();
-            starRating();
+
             setTimeout(resetCards, 1200);
         }
         if (pairs.length === 15) {
@@ -164,6 +164,60 @@ deck.addEventListener('click', function play(clicked) {
 })
 
 
+
+/* *** *** MATCH & UNMATCH *** *** */
+function checkIfMatch() {
+    if (openCards[0] == openCards[1]) {
+        //* if the cards match *//
+        match();
+
+    } else {
+        //* if the cards don't match *//
+
+        setTimeout(unmatch, 1200);
+        setTimeout(resetCards, 1200);
+    }
+}
+
+/* *** *** MATCH Function *** *** */
+
+function match() {
+
+    let firstToPairs = firstCard.className += " match";
+    pairs.push(firstToPairs);
+    let secondToPairs = secondCard.className += " match";
+    pairs.push(secondToPairs);
+    openCards = [];
+    clicks = 0;
+}
+
+/* *** *** UNMATCH Function *** *** */
+
+function unmatch() {
+
+    firstCard.classList.remove("open", "show");
+    secondCard.classList.remove("open", "show");
+    openCards = [];
+    clicks = 0;
+
+}
+
+/* *** *** RESET  CARDS*** *** */
+//resets all picked cards and starts counting clicks from 0
+
+function resetCards() {
+    firstCard = "";
+    secondCard = '';
+    clicks = 0;
+}
+
+/* *** *** REMOVE MATCH*** *** */
+//removes all classes with open show match
+function removeMatch() {
+    for (i = 0; i < cards.length; i++) {
+        card[i].classList.remove('open', 'show', 'match');
+    }
+}
 
 
 /* *** *** *** Instructions *** *** *** */
@@ -179,12 +233,14 @@ deck.addEventListener('click', function play(clicked) {
  function showCard(){}
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
 function addCardtoOpen(){}
+
  *  - if the list already has another card, check to see if the two cards match
  function checkIfMatch(){}
  *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
  function matched(){}
  *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
  function unmatched(){}
+
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  function countMoves(){}
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
