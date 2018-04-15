@@ -8,67 +8,84 @@ $(document).ready(function () {
 
 
     // Array which holds cards with unique images -> half of deck
-    const cardsUnique = [{
-            'name': 'baever',
-            'img': 'img/baever.svg',
-  },
-        {
-            'name': 'cat',
-            'img': 'img/cat.svg',
-  },
-        {
-            'name': 'chick',
-            'img': 'img/chick.svg',
-  },
-        {
-            'name': 'dog',
-            'img': 'img/dog.svg',
-  },
-        {
-            'name': 'donkey',
-            'img': 'img/donkey.svg',
-  },
-        {
-            'name': 'duck',
-            'img': 'img/duck.svg',
-  },
-        {
-            'name': 'elephant',
-            'img': 'img/elephant.svg',
-  },
-        {
-            'name': 'hen',
-            'img': 'img/hen.svg',
-  },
-        {
-            'name': 'lion',
-            'img': 'img/lion.svg',
-  },
-        {
-            'name': 'monkey',
-            'img': 'img/monkey.svg',
-  },
-        {
-            'name': 'penguin',
-            'img': 'img/penguin.svg',
-  },
-        {
-            'name': 'piggy',
-            'img': 'img/piggy.svg',
-  },
-        {
-            'name': 'bear',
-            'img': 'img/bear.svg',
-  },
-        {
-            'name': 'walrus',
-            'img': 'img/walrus.svg',
-  },
-        {
-            'name': 'zebra',
-            'img': 'img/zebra.svg',
-  },
-];
+    const cardsUnique = [
+    {
+        id: 1,
+        name: 'bear',
+        img: 'img/bear.svg'
+        },
+    {
+        id: 2,
+        name: 'beaver',
+        img: 'img/beaver.svg'
+        },
+    {
+        id: 3,
+        name: 'chick',
+        img: 'img/chick.svg'
+        },
+    {
+        id: 4,
+        name: 'cat',
+        img: 'img/cat.svg'
+        },
+
+    {
+        id: 5,
+        name: 'dog',
+        img: 'img/dog.svg'
+        },
+    {
+        id: 6,
+        name: 'donkey',
+        img: 'img/donkey.svg'
+        },
+    {
+        id: 7,
+        name: 'duck',
+        img: 'img/duck.svg'
+        },
+    {
+        id: 8,
+        name: 'elephant',
+        img: 'img/elephant.svg'
+        },
+    {
+        id: 9,
+        name: 'hen',
+        img: 'img/hen.svg'
+        },
+    {
+        id: 10,
+        name: 'lion',
+        img: 'img/lion.svg'
+        },
+    {
+        id: 11,
+        name: 'monkey',
+        img: 'img/monkey.svg'
+        },
+    {
+        id: 12,
+        name: 'penguin',
+        img: 'img/penguin.svg'
+        },
+    {
+        id: 13,
+        name: 'piggy',
+        img: 'img/piggy.svg'
+        },
+    {
+        id: 14,
+        name: 'walrus',
+        img: 'img/walrus.svg'
+        },
+    {
+        id: 15,
+        name: 'zebra',
+        img: 'img/zebra.svg'
+        },
+    ];
 
     //creating pairs by duplicating card array
     const cards = cardsUnique
@@ -77,18 +94,15 @@ $(document).ready(function () {
     const deck = $('<ul></ul>').addClass('deck');
     game.append(deck);
 
-    let selectedCards = []; //array to hold selected cards per turn
+    let open = []; //array to hold selected cards per turn
+
     let firstCard = ''; // first selected card per turn
     let secondCard = ''; //second selected card per turn
     let count = 0; //counts moves per turn
     let previousTarget = null;
 
-    const time = $(".time");
-    let minutes = $(".minutes");
-    let seconds = $(".seconds");
-    let timer;
 
-
+    let moves = $('.moves');
 
     /* *** *** *** *** *** FUNCTIONS *** *** *** *** *** */
 
@@ -116,6 +130,7 @@ $(document).ready(function () {
         // *   - loop through each card and create its HTML
         for (const item of cards) {
             const {
+                id,
                 name,
                 img
             } = item;
@@ -152,17 +167,19 @@ $(document).ready(function () {
     function play() {
         //resets all the previous moves and empties deck
         deck.empty();
+        movesCount = 0;
+        moves.html(movesCount);
+
+
+
+        //create new deck
+        displayCards();
         //before game starts shuffle the cards
         shuffle(cards);
-        displayCards();
-
         //function to handle events on cards
         eventHandler();
+
         //reset timer after game ends
-        resettimer = 0;
-        seconds.innerText = 0;
-        minutes.innerText = 0;
-        stopTimer();
 
     };
 
@@ -195,27 +212,31 @@ $(document).ready(function () {
             card.classList.remove('selected');
         });
     };
+
     /* *** *** MOVES COUNTER *** *** */
 
+    const moves = document.querySelector(".moves");
+    let countingMoves = 0;
+    const star = document.querySelectorAll('.fa-star');
+    const starOne = star[0];
+    const starTwo = star[1];
 
-    /* *** *** STAR RATING *** *** */
+    function starRemoval() {
+        countingMoves++;
+        moves.innerText = countingMoves;
 
+        if (countingMoves == 1) {
+            startTimer();
+        }
 
+        if (countingMoves == 10) {
+            starOne.className += " hidden";
 
-    function startTimer() {
-        timer = setInterval(function () {
-            seconds.innerText++;
-            if (seconds.innerText == 60) {
-                minutes.innerText++;
-                seconds.innerText = 0;
-            }
-        }, (1000));
-        return timer;
+        } else if (countingMoves == 16) {
+            starTwo.className += " hidden";
+        }
     }
-
-    function stopTimer() {
-        clearInterval(timer);
-    }
+    /* *** *** STAR RATING *** *** */A
 
 
     /* *** *** TIMER *** *** */
@@ -224,6 +245,30 @@ $(document).ready(function () {
 
     /* *** *** MODAL *** *** */
 
+    /* *** *** RESET *** *** */
+    const restart = $(".restart");
+    restart.addEventListener("click", function buttonReset() {
+
+        if (firstCard != "") {
+            firstCard.classList.remove("open", "show")
+        };
+        removeMatch();
+
+        resetCards();
+
+        openedCards = [];
+        countingMoves = 0;
+        moves.innerText = 0;
+        secondsLabel.innerHTML = 0;
+        matchedCardsInArray = [];
+        totalSeconds = 0;
+        starOne.classList.remove("hidden");
+        starTwo.classList.remove("hidden");
+        clearInterval(interval);
+        shuffle(fullDeck);
+
+
+    })
 
     /* *** *** *** EVENT LISTENERS*** *** *** */
     //Event listener ->  if a card is clicked: display the card's symbol
@@ -243,7 +288,7 @@ $(document).ready(function () {
 
 
     //Event listener -> on click flip the card
-    function eventHandler() {
+    function eventHandlers() {
         deck.on('click', event => {
 
             const clicked = event.target;
@@ -255,11 +300,7 @@ $(document).ready(function () {
             ) {
                 return;
             }
-            //Start timer on first click on a card
-            if (resettimer === 0) {
-                startTimer();
-                resettimer = 1;
-            }
+
             if (count < 2) {
                 count++;
                 if (count === 1) {
@@ -295,10 +336,23 @@ $(document).ready(function () {
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
+ deck.on('click', function(){
+
+ });
+ function showCard(){}
  *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+function addCardtoOpen(){}
  *  - if the list already has another card, check to see if the two cards match
+ function checkIfMatch(){}
  *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+ function matched(){}
  *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+ function unmatched(){}
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+ function countMoves(){}
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+function endGame{}
+
+function openModal{}
+
+*/

@@ -5,6 +5,10 @@
 
     <meta charset="UTF-8">
     <title>Memory Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="ozana_buljan">
+    <meta name="description" content="Udacity FEND Memory Game Project :: by ozana_buljan">
+
     <!--Fonts & Icons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--Animate css-->
@@ -15,36 +19,140 @@
 
 <body>
     <div class="container">
-        <h1>Find my buddy</h1>
-
+        <header>
+            <h1>Find my buddy!</h1>
+        </header>
         <section class="score-panel">
             <ul class="stars">
                 <li><i class="fa fa-star"></i></li>
                 <li><i class="fa fa-star"></i></li>
                 <li><i class="fa fa-star"></i></li>
             </ul>
-            <div><span class="moves">0</span> Moves</div>
+            <div class="move-count">
+                <span class="moves">0</span> Moves
+            </div>
+            <div class="pair-count">
+                Found: <span class="pairs">0</span> of 15
+            </div>
             <div class="time">
-                <span class="minutes">0</span>min:<span class="seconds">0</span>sec
+                <span class="minutes">00</span> m : <span class="seconds">00</span> s
             </div>
             <div class="restart">
                 <i class="fa fa-repeat"></i>
             </div>
         </section>
+        <ul class="deck">
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
+            <li class="card">
+                <img>
+            </li>
 
-        <div id="game"></div>
-
+        </ul>
+        <div id="modalWrapper" class="modal">
+            <div class="modal-content">
+                <h1>Congratulations!</h1>
+                <p>You have finished the game with <span id="movesResult">0</span> Moves and <span id="starsResult">0</span> Star.</p>
+                <p>Your time: <span id="finalTime">00</span></p>
+                <div id="replay">
+                    <i class="fa fa-repeat"></i>
+                </div>
+            </div>
+        </div>
     </div>
-
     <!--Scripts-->
 
-    <!-- jQuery plugin -->
+    <!-- jQuery plugin
 
-    <script src="js\jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 
 
-    </script>
+    </script>-->
     <!-- Script for Bootstrap Sweetalert -->
     <script src='https://cdn.jsdelivr.net/npm/sweetalert'></script>
 
