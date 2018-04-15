@@ -41,6 +41,115 @@ h1 {
     font-size: 3em;
 }
 
+/***--- --- --- DECK (cards container) --- --- ---***/
+
+.deck {
+    margin: 0 auto;
+    width: 660px;
+    min-height: 680px;
+    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    padding: 32px;
+    border-radius: 10px;
+    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+/***--- --- --- CARDS --- --- ---***/
+
+img {
+    visibility: hidden;
+    width: 100%;
+}
+
+.card {
+    background: #2e3d49;
+    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all .4s linear;
+    transform-style: preserve-3d;
+    margin: 5px;
+}
+
+
+/*
+.back -> side with image
+.front -> siide without image
+*/
+
+.card {
+    height: 100px;
+    width: 100px;
+    border-radius: 10px;
+}
+
+
+.show {
+    pointer-events: none;
+}
+
+.deck .card.show img {
+    transform: rotateY(180deg);
+    visibility: visible;
+}
+
+.open {
+    transform: rotateY(180deg);
+    background: #02b3e4;
+    cursor: default;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.selected {
+    transform: rotateY(180deg);
+}
+
+
+
+.match {
+    cursor: default;
+    background: #02ccba;
+    pointer-events: none;
+    border-radius: 10px;
+    !important;
+    animation-name: pulse;
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+    animation-duration: .75s;
+
+}
+
+.unmatched {
+    cursor: default;
+    animation-name: rubberBand;
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+    animation-duration: .75s;
+}
+
+.deck .card.unmatched img {
+    visibility: visible;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.9;
+}
+
 /***--- --- --- SCORE PANEL --- --- ---***/
 
 .score-panel {
@@ -68,183 +177,34 @@ h1 {
     cursor: pointer;
 }
 
-/***--- --- --- DECK (cards container) --- --- ---***/
 
-.deck {
-    margin: 0 auto;
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
-}
+/***--- --- --- MODAL --- --- ---***/
 
-/***--- --- --- CARDS --- --- ---***/
-
-.card {
-    background: #2e3d49;
-    box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    border-radius: 10px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    transition: all .4s linear;
-    transform-style: preserve-3d;
-    margin: 5px;
-}
-
-/*
-.back -> side with image
-.front -> siide without image
-*/
-
-.card,
-.back,
-.front {
-    height: 100px;
-    width: 100px;
-    border-radius: 10px;
-}
-
-.back,
-.front {
-    position: absolute;
-    backface-visibility: hidden;
-}
-
-.front {
-    transform: rotateY(0);
-    cursor: default;
-    border-radius: 10px;
-    z-index: 2;
-
-}
-
-.back {
-    transform: rotateY(180deg);
-    background: #02b3e4;
-    cursor: default;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-
-.show {
-
-    pointer-events: none;
-}
-
-.open {
-
-    background: #02b3e4;
-    cursor: default;
-}
-
-.selected {
-    transform: rotateY(180deg);
-}
-
-.match {
-    cursor: default;
-    background: #02ccba;
-    pointer-events: none;
-    border-radius: 10px;
-    !important;
-}
-
-.nonmatch {
-    background: #f95c3d;
-}
-
-/*
- * Styles for congratulations modal
- */
-
-.overlay {
+.modal {
     position: fixed;
-    top: 0;
-    bottom: 0;
+    z-index: 1;
+    padding-top: 300px;
     left: 0;
-    right: 0;
-    background: rgba(0, 0, 0, 0.7);
-    transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
-}
-
-.overlay:target {
-    visibility: visible;
-    opacity: 1;
-}
-
-.popup {
-    margin: 70px auto;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 5px;
-    width: 85%;
-    position: relative;
-    transition: all 5s ease-in-out;
-    font-family: 'Gloria Hallelujah', cursive;
-}
-
-.popup h2 {
-    margin-top: 0;
-    color: #333;
-    font-family: Tahoma, Arial, sans-serif;
-}
-
-.popup .close {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    transition: all 200ms;
-    font-size: 30px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #333;
-}
-
-.popup .close:hover {
-    color: #E5F720;
-}
-
-.popup .content-1,
-.content-2 {
-    max-height: 30%;
-    overflow: auto;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
     text-align: center;
+    display: none;
 }
 
-.show {
-    visibility: visible !important;
-    opacity: 100 !important;
+/* Modal Content */
+
+.modal-content {
+    background-color: rgb(223, 66, 244);
+    margin: auto;
+    padding: 50px;
+    border: 1px solid #888;
+    width: 30%;
+
 }
 
-#starRating li {
-    display: inline-block;
-}
-
-#play-again {
-    background-color: #141214;
-    padding: 0.7rem 1rem;
-    font-size: 1.1rem;
-    display: block;
-    margin: 0 auto;
-    width: 50%;
-    font-family: 'Gloria Hallelujah', cursive;
-    color: #ffffff;
-    border-radius: 5px;
-}
-
-/* animations */
+/***--- --- --- ANIMATIONS --- --- ---***/
 
 @keyframes flipInY {
     from {
@@ -318,8 +278,54 @@ h1 {
 
 
 
-/********/
+/***--- --- --- RESPONSIVENESS --- --- ---***/
 
-/*THE ᕕ( ᐛ )ᕗ END*/
+@media only screen and (max-width: 700px) {
 
-/********/
+    .score-panel {
+        width: 90%;
+    }
+
+    .deck {
+        width: 95%;
+        padding: 16px;
+        min-height: 100vw;
+    }
+
+    .deck .card {
+        width: 20vw;
+        height: 20vw;
+    }
+
+    .modal {
+        position: fixed;
+        padding-top: 200px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal-content {
+        padding: 0 0 10px 0;
+        width: 60%;
+        height: 200px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+
+    .score-panel {
+        font-size: 20px;
+    }
+
+    .modal {
+        position: fixed;
+        padding-top: 200px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .modal-content {
+        padding: 0 0 10px 0;
+        width: 60%;
+    }
+    )
