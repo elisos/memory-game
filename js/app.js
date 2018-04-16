@@ -126,9 +126,9 @@ function createDeck() {
     }
 }
 /* *** *** PLAY *** *** */
-deck.addEventListener('click', function play(clicked) {
+deck.addEventListener('click', play);
 
-
+function play(clicked) {
     createDeck();
 
     if (clicked.target.nodeName == 'LI') {
@@ -165,7 +165,7 @@ deck.addEventListener('click', function play(clicked) {
             }, 500);
         }
     }
-})
+}
 
 
 
@@ -203,6 +203,7 @@ function unmatch() {
     secondCard.classList.remove("open", "show");
     openCards = [];
     clicks = 0;
+    console.log(firstCard, openCards[0], secondCard, openCards[1])
 }
 
 /* *** *** RESET  CARDS*** *** */
@@ -324,7 +325,7 @@ function endGame(moveCount, score) {
 /* *** *** RESTART GAME *** *** */
 let restart = document.getElementById("restart");
 
-restart.addEventListener("click", restartGame());
+restart.addEventListener("click", restartGame);
 
 function restartGame() {
     swal({
