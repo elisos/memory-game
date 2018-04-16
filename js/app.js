@@ -180,6 +180,9 @@ function removeMatch() {
 const time = document.querySelector(".time");
 let minutes = document.querySelector(".minutes");
 let seconds = document.querySelector(".seconds");
+const pause = document.getElementById("pause");
+let paused = 0;
+let stopped = 0;
 let timer;
 let totalTime = 0;
 
@@ -192,11 +195,38 @@ function startTimer() {
         }
     }, (1000));
     return timer;
+
 }
 
 function stopTimer() {
     clearInterval(timer);
 }
+
+function pauseTimer() {
+    if (stopped == 0) {
+        if (paused == 0) {
+            stopTimer();
+            document.getElementById("pause").innerHTML = '<i class="fa fa-play"></i>';
+            paused = 1;
+            return;
+        }
+        if (paused == 1) {
+            startTimer();
+            document.getElementById("pause").innerHTML = '<i class="fa fa-pause"></i>';
+            paused = 0;
+            return;
+        }
+        return;
+    }
+
+}
+
+function resumeTimer() {
+    if (!this.interval) this.startTimer();
+}
+
+pause.addEventListener("click", pauseTimer);
+
 
 
 /* *** *** STAR RATING & MOVE COUNTER *** *** */
@@ -267,7 +297,8 @@ function endGame(moveCount, score) {
         },
     }).then(function (isConfirm) {
         if (isConfirm) {
-            stopTimer(timer);
+            resetStarRating();
+            startTimer();
             openCards = [];
             shuffle(cards);
             flip(clicked);
