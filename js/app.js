@@ -137,7 +137,7 @@ function flip(clicked) {
 
     if (pairs.length === 15) {
         let score = starRating(moveCount).score;
-        setTimeout(endGame(moveCount, score), 500);
+        endGame(moveCount, score);
     }
 }
 
@@ -154,6 +154,7 @@ function checkMatch(a, b) {
             openCards[1].classList.add("match");
             pairs.push(openCards[0]);
             pairs.push(openCards[1]);
+            countPairs();
         } else {
             openCards[0].classList.remove("open", "show");
             openCards[1].classList.remove("open", "show");
@@ -162,7 +163,6 @@ function checkMatch(a, b) {
         deck.addEventListener('click', flip)
     }, 750);
     starRating();
-    countPairs();
 }
 
 
@@ -204,6 +204,7 @@ function stopTimer() {
 
 function pauseTimer() {
     if (stopped == 0) {
+        //pause
         if (paused == 0) {
             stopTimer();
             document.getElementById("pause").innerHTML = '<i class="fa fa-play"></i>';
@@ -214,6 +215,7 @@ function pauseTimer() {
             }
             return;
         }
+        //resume
         if (paused == 1) {
             startTimer();
             document.getElementById("pause").innerHTML = '<i class="fa fa-pause"></i>';
@@ -228,10 +230,6 @@ function pauseTimer() {
         return;
     }
 
-}
-
-function resumeTimer() {
-    if (!this.interval) this.startTimer();
 }
 
 pause.addEventListener("click", pauseTimer);
@@ -333,7 +331,7 @@ function restartGame() {
             resetStarRating();
             openCards = [];
             shuffle(cards);
-            flip(clicked);
+            flip();
         }
     })
 }
