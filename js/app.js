@@ -85,9 +85,6 @@ const cards = cardsUnique
 const deck = document.querySelector('.deck'); //element which contains all cards
 const card = document.querySelectorAll(".card"); // card element
 
-
-let firstCard = ""; //first card clicked in a turn
-let secondCard = ""; //second card clicked in a turn
 let openCards = []; //array which holds open cards
 let clicks = 0; //counts clicks on cards -> 2 clicks is one turn
 let pairs = []; //counts matched pairs - > game finished when all 15 pairs are matched
@@ -110,110 +107,65 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
+    createDeck();
     return array;
 }
 shuffle(cards);
 
 /* *** *** CREATE DECK *** *** */
 
-// @description -> by iterating over cards array; it attaches the images and sets card's id attribute
+// by iterating over cards array; it attaches the images and sets card's id attribute
 
 function createDeck() {
     for (let i = 0; i < card.length; i++) {
-        card[i].children.item(0).setAttribute("src", cards[i].img);
-        card[i].setAttribute("id", cards[i].id);
+        card[i].children.item(0).src = cards[i].img;
+        card[i].dataset.id = cards[i].id;
     }
 }
-/* *** *** PLAY *** *** */
-deck.addEventListener('click', play);
+/* *** *** FLIP CARD *** *** */
+function flip(clicked) {
 
-function play(clicked) {
-    createDeck();
+    if (!clicked.target.classList.contains('card')) return; // If the target isn't a card, stop the function
 
-    if (clicked.target.nodeName == 'LI') {
-        if (clicks < 2) {
-            clicks++;
-            if (clicks === 1) {
-                firstCard = clicked.target;
-                firstCard.classList.add("open");
-                firstCard.classList.add("show");
-                let cardId = clicked.target.getAttribute("id");
-                openCards.push(cardId);
+    if (openCards.length < 2) {
+        clicked.target.classList.add("open", "show");
+        openCards.push(clicked.target);
+    }
+    if (openCards.length == 2) {
+        deck.removeEventListener('click', flip);
+        checkMatch(openCards[0], openCards[1]);
+    }
 
-
-            } else if (clicks === 2) {
-                secondCard = clicked.target;
-                secondCard.classList.add("open");
-                secondCard.classList.add("show");
-                let cardId = clicked.target.getAttribute("id");
-                openCards.push(cardId);
-
-            }
-        }
-
-        if (openCards.length == 2) {
-            checkIfMatch();
-            starRating();
-            countPairs();
-            setTimeout(resetCards, 1200);
-        }
-        if (pairs.length === 15) {
-            let score = starRating(moveCount).score;
-            setTimeout(function () {
-                endGame(moveCount, score);
-            }, 500);
-        }
+    if (pairs.length === 15) {
+        let score = starRating(moveCount).score;
+        setTimeout(endGame(moveCount, score), 500);
     }
 }
 
+deck.addEventListener('click', flip);
 
 
-/* *** *** MATCH & UNMATCH *** *** */
-function checkIfMatch() {
-    if (openCards[0] == openCards[1]) {
-        //* if the cards match *//
-        match();
+/* *** *** MATCH & UNMATCH COMPARISON *** *** */
 
-    } else {
-        //* if the cards don't match *//
-
-        setTimeout(unmatch, 1200);
-        setTimeout(resetCards, 1200);
-    }
+function checkMatch(a, b) {
+    setTimeout(function () {
+        if (a.dataset.id == b.dataset.id) {
+            //* if the cards match *//
+            openCards[0].classList.add("match");
+            openCards[1].classList.add("match");
+            pairs.push(openCards[0]);
+            pairs.push(openCards[1]);
+        } else {
+            openCards[0].classList.remove("open", "show");
+            openCards[1].classList.remove("open", "show");
+        }
+        openCards = [];
+        deck.addEventListener('click', flip)
+    }, 750);
+    starRating();
+    countPairs();
 }
 
-/* *** *** MATCH Function *** *** */
-
-function match() {
-
-    let firstToPairs = firstCard.classList.add("match");
-    pairs.push(firstToPairs);
-    let secondToPairs = secondCard.classList.add("match");
-    pairs.push(secondToPairs);
-    openCards = [];
-    clicks = 0;
-}
-
-/* *** *** UNMATCH Function *** *** */
-
-function unmatch() {
-
-    firstCard.classList.remove("open", "show");
-    secondCard.classList.remove("open", "show");
-    openCards = [];
-    clicks = 0;
-    console.log(firstCard, openCards[0], secondCard, openCards[1])
-}
-
-/* *** *** RESET  CARDS*** *** */
-//resets all picked cards and starts counting clicks from 0
-
-function resetCards() {
-    firstCard = "";
-    secondCard = '';
-    clicks = 0;
-}
 
 /* *** *** REMOVE MATCH*** *** */
 //removes all classes with open show match
@@ -316,8 +268,11 @@ function endGame(moveCount, score) {
         },
     }).then(function (isConfirm) {
         if (isConfirm) {
-            firstClick = false;
-            gamePlay();
+            stopTimer(timer);
+            openCards = [];
+            clicks = 0;
+            shuffle(cards);
+            flip(clicked);
         }
     })
 }
@@ -341,7 +296,8 @@ function restartGame() {
             stopTimer(timer);
             openCards = [];
             clicks = 0;
-            play(clicked);
+            shuffle(cards);
+            flip(clicked);
         }
     })
 }
