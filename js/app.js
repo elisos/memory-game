@@ -208,12 +208,21 @@ function pauseTimer() {
             stopTimer();
             document.getElementById("pause").innerHTML = '<i class="fa fa-play"></i>';
             paused = 1;
+            deck.removeEventListener('click', flip);
+            for (let i = 0; i < card.length; i++) {
+                card[i].classList.add("disabled");
+            }
             return;
         }
         if (paused == 1) {
             startTimer();
             document.getElementById("pause").innerHTML = '<i class="fa fa-pause"></i>';
             paused = 0;
+            deck.addEventListener('click', flip);
+            for (let i = 0; i < card.length; i++) {
+                card[i].classList.remove("disabled");
+            }
+
             return;
         }
         return;
@@ -298,7 +307,6 @@ function endGame(moveCount, score) {
     }).then(function (isConfirm) {
         if (isConfirm) {
             resetStarRating();
-            startTimer();
             openCards = [];
             shuffle(cards);
             flip(clicked);
@@ -323,7 +331,6 @@ function restartGame() {
     }).then(function (isConfirm) {
         if (isConfirm) {
             resetStarRating();
-            startTimer();
             openCards = [];
             shuffle(cards);
             flip(clicked);
