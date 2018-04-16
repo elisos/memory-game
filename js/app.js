@@ -86,7 +86,6 @@ const deck = document.querySelector('.deck'); //element which contains all cards
 const card = document.querySelectorAll(".card"); // card element
 
 let openCards = []; //array which holds open cards
-let clicks = 0; //counts clicks on cards -> 2 clicks is one turn
 let pairs = []; //counts matched pairs - > game finished when all 15 pairs are matched
 
 
@@ -132,7 +131,7 @@ function flip(clicked) {
         openCards.push(clicked.target);
     }
     if (openCards.length == 2) {
-        deck.removeEventListener('click', flip);
+        deck.removeEventListener('click', flip); // to stop from further clicking on cards until animation is finished
         checkMatch(openCards[0], openCards[1]);
     }
 
@@ -270,7 +269,6 @@ function endGame(moveCount, score) {
         if (isConfirm) {
             stopTimer(timer);
             openCards = [];
-            clicks = 0;
             shuffle(cards);
             flip(clicked);
         }
@@ -293,9 +291,9 @@ function restartGame() {
         buttons: true
     }).then(function (isConfirm) {
         if (isConfirm) {
-            stopTimer(timer);
+            resetStarRating();
+            startTimer();
             openCards = [];
-            clicks = 0;
             shuffle(cards);
             flip(clicked);
         }
