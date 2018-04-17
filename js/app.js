@@ -138,7 +138,7 @@ function flip(clicked) {
         checkMatch(openCards[0], openCards[1]);
     }
 
-    if (pairs.length === 15) {
+    if (pairs.length === 30) {
         let score = starRating(moveCount).score;
         endGame(moveCount, score);
     }
