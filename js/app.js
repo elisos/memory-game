@@ -121,7 +121,10 @@ function createDeck() {
         card[i].dataset.id = cards[i].id;
     }
 }
+
 /* *** *** FLIP CARD *** *** */
+// function takes event target (clicked) as an argument; checks if it's a card element, opens card and checks if cards match. If all 15 pairs are matched, it ends the game.
+
 function flip(clicked) {
 
     if (!clicked.target.classList.contains('card')) return; // If the target isn't a card, stop the function
@@ -141,7 +144,6 @@ function flip(clicked) {
     }
 }
 
-deck.addEventListener('click', flip);
 
 
 /* *** *** MATCH & UNMATCH COMPARISON *** *** */
@@ -213,6 +215,11 @@ function pauseTimer() {
             for (let i = 0; i < card.length; i++) {
                 card[i].classList.add("disabled");
             }
+            swal({
+                closeOnEsc: true,
+                closeOnClickOutside: true,
+                title: "GAME PAUSED!",
+            });
             return;
         }
         //resume
@@ -232,7 +239,6 @@ function pauseTimer() {
 
 }
 
-pause.addEventListener("click", pauseTimer);
 
 
 
@@ -283,6 +289,21 @@ function countPairs() {
     pairsNo.innerText = pairsCount;
 }
 
+/* *** *** *** *** *** MODALS *** *** *** *** *** */
+
+/* *** *** GREETINGS MODAL *** *** */
+window.onload = function () {
+    swal({
+        closeOnEsc: true,
+        closeOnClickOutside: true,
+        title: "Hallo!",
+        text: `Welcome to our little ZOO!
+We are playing hide and seek.
+Would you like to help me to find my buddies? `,
+        button: "LET'S PLAY",
+        background: 'url(img/modal.svg)',
+    });
+}
 
 /* *** *** END GAME MODAL *** *** */
 
@@ -296,7 +317,7 @@ function endGame(moveCount, score) {
         text: `Moves:  ${movesCount}
                 Game rating : ${score}
                 Time : ${minutes} : ${seconds}`,
-        imageUrl: "img/unicorn.gif",
+        icon: "success",
         button: {
             playAgain: {
                 text: "Play again?"
@@ -315,7 +336,7 @@ function endGame(moveCount, score) {
 /* *** *** RESTART GAME *** *** */
 let restart = document.getElementById("restart");
 
-restart.addEventListener("click", restartGame);
+
 
 function restartGame() {
     swal({
@@ -335,8 +356,16 @@ function restartGame() {
         }
     })
 }
+/* *** *** *** *** *** EVENT LISTENERS *** *** *** *** *** */
 
+// Event listener -> on click on deck, flip card
+deck.addEventListener('click', flip);
 
+// Event listener -> on click on pause/resume button -> stop or resume the game
+pause.addEventListener("click", pauseTimer);
+
+// Event listener -> on click on restart button ->restart the game
+restart.addEventListener("click", restartGame);
 
 /* *** *** *** Instructions *** *** *** */
 

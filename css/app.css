@@ -24,31 +24,50 @@ body {
 
 body {
     /*background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-    background-color: #4ee0d1;
-    font-family: 'Coda', cursive;
+    font-family: 'Amatic SC', cursive;
+    font-weight: 600;
+    font-size: 20px;
     color: #2e3d49;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+/***--- --- --- HEADER --- --- ---***/
+
+header {
+    height 100px;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
-    font-family: ;
-    font-size: 3em;
+    font-family: 'Butterfly Kids', cursive;
+    font-size: 75px;
+    line-height: 100px;
 }
+
+/***--- --- ---GAME CONTAINER --- --- ---***/
+
+.container {
+    display: ;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../img/game-background-desktop.png");
+    background: url(mountain.jpg);
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+}
+
+
 
 /***--- --- --- DECK (cards container) --- --- ---***/
 
 .deck {
+    grid-column: 1;
     margin: 0 auto;
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
+    background: #9acfc8 60%;
+    padding: auto;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
     display: flex;
@@ -65,9 +84,12 @@ img {
 }
 
 .card {
+    margin: 5px;
+    height: 100px !important;
+    width: 100px !important;
+    border-radius: 10px !important;
     background: #2e3d49;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
-    border-radius: 10px;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -75,19 +97,6 @@ img {
     position: relative;
     transition: all .4s linear;
     transform-style: preserve-3d;
-    margin: 5px;
-}
-
-
-/*
-.back -> side with image
-.front -> siide without image
-*/
-
-.card {
-    height: 100px !important;
-    width: 100px !important;
-    border-radius: 10px !important;
 }
 
 
@@ -109,11 +118,6 @@ img {
     background-position: center center;
 }
 
-.selected {
-    transform: rotateY(180deg);
-}
-
-
 
 .match {
     cursor: default;
@@ -128,19 +132,6 @@ img {
 
 }
 
-.unmatched {
-    cursor: default;
-    animation-name: rubberBand;
-    -webkit-backface-visibility: visible !important;
-    backface-visibility: visible !important;
-    animation-duration: .75s;
-}
-
-.deck .card.unmatched img {
-    visibility: visible;
-}
-
-
 .hidden {
     display: none;
 }
@@ -153,6 +144,7 @@ img {
 /***--- --- --- SCORE PANEL --- --- ---***/
 
 .score-panel {
+    grid-column: 2;
     width: 600px;
     margin-bottom: 10px;
     display: grid;
@@ -226,28 +218,29 @@ li {
 
 /***--- --- --- MODAL --- --- ---***/
 
-.modal {
-    position: fixed;
-    z-index: 1;
-    padding-top: 300px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    text-align: center;
-    display: none;
+.swal-overlay {
+    background-color: rgba(43, 165, 137, 0.45);
 }
 
-/* Modal Content */
+.swal-modal {
+    background-image: url('../img/modal-background.svg');
+    border: 3px solid white;
+}
 
-.modal-content {
-    background-color: rgb(223, 66, 244);
-    margin: auto;
-    padding: 50px;
-    border: 1px solid #888;
-    width: 30%;
+.swal-text {
+    padding: 17px;
+    display: block;
+    margin: 22px;
+    text-align: center;
+    color: #61534e;
+}
 
+.swal-button {
+    padding: 7px 19px;
+    border-radius: 2px;
+    background-color: #2e3d49;
+    font-size: 12px;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
 }
 
 /***--- --- --- ANIMATIONS --- --- ---***/
@@ -326,21 +319,20 @@ li {
 
 /***--- --- --- RESPONSIVENESS --- --- ---***/
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 768px) {
 
-    .score-panel {
-        width: 90%;
-    }
+    .score-panel {}
 
     .deck {
-        width: 95%;
-        padding: 16px;
+        width: 100vw;
         min-height: 100vw;
+        padding: 5px 0;
+        margin: 0;
     }
 
-    .deck .card {
-        width: 20vw;
-        height: 20vw;
+    .card {
+        width: 48px;
+        height: 48px;
     }
 
 }
@@ -348,7 +340,7 @@ li {
 @media only screen and (max-width: 1024px) {
 
     .score-panel {
-        font-size: 20px;
+        font-size: 16px;
     }
 
 
