@@ -46,7 +46,7 @@ body {
     border-radius: 2px;
 }
 
-/***--- --- --- HEADER --- --- ---***/
+/***--- --- --- HEADING --- --- ---***/
 
 .title {
     grid-column: 1/5;
@@ -190,7 +190,6 @@ img {
     margin-top: 0;
     grid-column: 7/12;
     grid-row: 6;
-    color: white;
 
 }
 
@@ -372,32 +371,6 @@ footer {
 
 /***--- --- --- ANIMATIONS --- --- ---***/
 
-@keyframes flipInY {
-    from {
-        transform: perspective(400px) rotate3d(0, 1, 0, 90deg);
-        animation-timing-function: ease-in;
-        opacity: 0;
-    }
-
-    40% {
-        transform: perspective(400px) rotate3d(0, 1, 0, -20deg);
-        animation-timing-function: ease-in;
-    }
-
-    60% {
-        transform: perspective(400px) rotate3d(0, 1, 0, 10deg);
-        opacity: 1;
-    }
-
-    80% {
-        transform: perspective(400px) rotate3d(0, 1, 0, -5deg);
-    }
-
-    to {
-        transform: perspective(400px);
-    }
-}
-
 @keyframes rubberBand {
     from {
         transform: scale3d(1, 1, 1);
@@ -446,46 +419,140 @@ footer {
 
 /***--- --- --- RESPONSIVENESS --- --- ---***/
 
-@media only screen and (max-width: 768px) {
-    .body {
+/***--- ---NARROW PHONE --- ---***/
 
+@media only screen and (max-width: 321px) {
+    .body {
         background-image: url("../img/background%20gradient.svg");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
     }
     .wrapper {
-
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(12, 1fr);
+        grid-gap: none;
+        height: 95vh;
         justify-content: center;
         align-items: center;
+        border: 1px solid white;
     }
-    header {
-
-        height: 10vh;
+    /***--- --- --- HEADING --- --- ---***/
+    .title {
+        grid-column: 1/7;
+        grid-row: 1;
+        width: 100vw;
+        height: 7.5vh;
         margin: 0;
         padding: 0;
     }
-    h1 {
-        font-size: 20px;
-    }
 
     /***--- --- --- SCORE PANEL --- --- ---***/
-    .score-panel {
-
-        width: 100vw;
-        height: 10vh;
-    }
     .time-panel {
-
+        margin-bottom: -5vh;
+        grid-column: 1/7;
+        grid-row: 11/13;
         width: 100vw;
-        height: 10vh;
+    }
+
+    .score-panel {
+        margin-top: -5vh;
+        grid-column: 1/7;
+        grid-row: 2/4;
+        width: 100vw;
+
+    }
+    #restart {
+        order: 1;
     }
     /***--- --- --- DECK & CARDS --- --- ---***/
     .deck {
-        width: 80vw;
-        height: auto;
-        padding: 5px 0;
+        grid-column: span6;
+        grid-row: 4/10;
+        width: 100vw;
+        height: 65vh;
+        padding: 0.1em;
+        margin-top: 5vh;
+        justify-self: center;
+        align-self: center;
+    }
+
+    .card {
+        max-width: 40px;
+        max-height: 40px;
+        margin: 5px;
+    }
+
+    /***--- --- --- FOOTER --- --- ---***/
+    footer {
+        height: 5vh;
+    }
+}
+
+/***--- ---PHONE --- ---***/
+
+@media only screen and (min-width: 322px) and (max-width: 766px) {
+    .body {
+        background-image: url("../img/background%20gradient.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+    }
+    .wrapper {
         margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(12, 1fr);
+        grid-gap: none;
+        height: 95vh;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid white;
+    }
+    /***--- --- --- HEADING --- --- ---***/
+    .title {
+        grid-column: 1/7;
+        grid-row: 1;
+        width: 100vw;
+        height: 7.5vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    /***--- --- --- SCORE PANEL --- --- ---***/
+    .time-panel {
+        margin-bottom: 0;
+        grid-column: 1/7;
+        grid-row: 11/13;
+        width: 100vw;
+        height: 10vh;
+    }
+
+    .score-panel {
+        margin-top: 0;
+        grid-column: 1/7;
+        grid-row: 2/4;
+        height: 10vh;
+        width: 100vw;
+    }
+
+    #restart {
+        order: 1;
+    }
+    /***--- --- --- DECK & CARDS --- --- ---***/
+    .deck {
+        grid-column: span6;
+        grid-row: 4/10;
+        width: 100vw;
+        height: 55vh;
+        padding: 0.25em;
+        margin: auto;
+        justify-self: center;
+        align-self: center;
     }
 
     .card {
@@ -494,20 +561,10 @@ footer {
         margin: 5px;
     }
 
-}
 
-/***--- --- --- MODAL --- --- ---***/
-
-.swal-container {
-    width: 100vw;
-    height: 100vh;
-}
-
-@media only screen and (max-width: 1024px) {
-
-    .score-panel {
-        font-size: 16px;
+    /***--- --- --- FOOTER --- --- ---***/
+    footer {
+        height: 5vh;
     }
-
 
 }
