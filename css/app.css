@@ -302,17 +302,17 @@ footer {
     font-weight: 200;
 }
 
-/***--- --- --- MODAL --- --- ---***/
+/***--- --- --- MODALS --- --- ---***/
 
 .swal-overlay {
-    background-color: rgba(46, 61, 76, 0.45);
+    background-color: rgba(46, 61, 76, 0.60);
 }
 
 .swal-modal {
 
     background-image: url('../img/modal-background.svg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-color: transparent;
 }
@@ -348,20 +348,27 @@ footer {
     padding: 5em 2em 0.5em 2em;
 }
 
-.swal-greetings {
+.swal-greetings,
+.swal-restart,
+.swal-pause {
     width: 660 px;
-    background-image: url('../img/modal-background-animals.svg');
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
     background-color: transparent;
 }
 
-.swal-greetings > .swal-title {}
+.swal-greetings {
+    background-image: url('../img/modal-background-animals.svg');
+}
 
-.swal-greetings > .swal-text {}
+.swal-restart {
+    background-image: url('../img/modal-background.svg');
+}
 
-.swal-greetings > .swal-footer > {}
+.swal-pause {
+    background-image: url('../img/bear-rotating.gif'), url('../img/modal-background.svg');
+}
 
 /***--- --- --- ANIMATIONS --- --- ---***/
 

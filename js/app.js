@@ -87,7 +87,7 @@ const card = document.querySelectorAll(".card"); // card element
 
 let openCards = []; //array which holds open cards
 let pairs = []; //counts matched pairs - > game finished when all 15 pairs are matched
-
+const pairedCards = pairs.length / 2
 
 
 
@@ -138,9 +138,31 @@ function flip(clicked) {
         checkMatch(openCards[0], openCards[1]);
     }
 
-    if (pairs.length === 30) {
+    if (pairedCards == 15) {
         let score = starRating(moveCount).score;
-        endGame(moveCount, score);
+        stopTimer(timer);
+
+        swal({
+            closeOnEsc: true,
+            closeOnClickOutside: true,
+            title: "Game Won!",
+            text: `Moves:  ${movesCount}
+                Game rating : ${score}
+                Time : ${minutes} : ${seconds}`,
+            icon: "success",
+            button: {
+                playAgain: {
+                    text: "Play again?"
+                }
+            },
+        }).then(function (isConfirm) {
+            if (isConfirm) {
+                resetStarRating();
+                openCards = [];
+                shuffle(cards);
+                flip(clicked);
+            }
+        })
     }
 }
 
@@ -219,6 +241,7 @@ function pauseTimer() {
                 closeOnEsc: true,
                 closeOnClickOutside: true,
                 title: "GAME PAUSED!",
+                icon: "url(http://res.cloudinary.com/duc8x03hq/image/upload/v1524083275/bear-rotating_u0ft3z.gif)"
             });
             return;
         }
@@ -345,6 +368,7 @@ function restartGame() {
         title: "Do you want to start over ?",
         text: "Your progress will be lost!",
         dangerMode: true,
+        className: "swal-restart",
         buttons: true
     }).then(function (isConfirm) {
         if (isConfirm) {
