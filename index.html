@@ -15,8 +15,8 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand|Roboto" rel="stylesheet">
     <!--Animate css-->
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.css'>
-    <!-- MaterializeCSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+    <!-- MaterializeCSS
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> -->
 
     <!--My CSS-->
     <link rel="stylesheet" href="css/app.css">
@@ -27,29 +27,34 @@
 </head>
 
 <body>
-    <div class="container">
-        <header>
+    <div class="wrapper">
+        <div class="title materialize-card">
             <h1>Let's find my buddies!</h1>
-        </header>
+        </div>
 
 
-        <section class="score-panel">
-            <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-            </ul>
+        <div class="score-panel materialize-card">
+            <div class="game-rating">
+                <ul class="stars">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                </ul>
+                <p>Game rating</p>
+            </div>
+
             <div class="move-count">
-                <p><span class="moves">0</span> Moves</p>
+                <p><span class="moves">0</span></p>
+                <p>Moves</p>
             </div>
             <div class="pair-count">
-                <p>Pairs found:</p>
                 <p><span class="pairs">0</span> of 15</p>
+                <p>Pairs found</p>
             </div>
-        </section>
-        <section class="time-panel">
+        </div>
+        <section class="time-panel materialize-card">
             <div class="time">
-                <div><span class="minutes">00</span> m : <span class="seconds">00</span> s</div>
+                <p><span class="minutes">00</span> m : <span class="seconds">00</span> s</p>
                 <button id="pause">
                 <i class="fa fa-pause"></i>
                 </button>
@@ -170,7 +175,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 
     <!-- Script for Bootstrap Sweetalert -->
-    <script src='https://cdn.jsdelivr.net/npm/sweetalert'></script>
+    <script src="https://unpkg.com/sweetalert@2.1.0/dist/sweetalert.min.js"></script>
 
     <!-- My script -->
     <script src="js/app.js"></script>

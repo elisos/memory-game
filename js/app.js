@@ -296,12 +296,12 @@ window.onload = function () {
     swal({
         closeOnEsc: true,
         closeOnClickOutside: true,
-        title: "Hallo!",
+        title: "Hi there!",
         text: `Welcome to our little ZOO!
 We are playing hide and seek.
-Would you like to help me to find my buddies? `,
+Help me to find my buddies! `,
         button: "LET'S PLAY",
-        background: 'url(img/modal.svg)',
+        className: "swal-greetings"
     });
 }
 
@@ -342,9 +342,8 @@ function restartGame() {
     swal({
         closeOnEsc: true,
         closeOnClickOutside: true,
-        title: "Are you sure you  want to start over ?",
+        title: "Do you want to start over ?",
         text: "Your progress will be lost!",
-        icon: "warning",
         dangerMode: true,
         buttons: true
     }).then(function (isConfirm) {
