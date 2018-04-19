@@ -87,8 +87,7 @@ const card = document.querySelectorAll(".card"); // card element
 
 let openCards = []; //array which holds open cards
 let pairs = []; //counts matched pairs - > game finished when all 15 pairs are matched
-let matches = 0;
-
+let pairedCards = document.getElementsByClassName('card match open show');
 
 
 /* *** *** *** *** *** FUNCTIONS *** *** *** *** *** */
@@ -136,10 +135,9 @@ function flip(clicked) {
     if (openCards.length == 2) {
         deck.removeEventListener('click', flip); // to stop from further clicking on cards until animation is finished
         checkMatch(openCards[0], openCards[1]);
-        matches++;
     }
 
-    if (matches === 15) {
+    if (pairedCards.length == 30) {
         let score = starRating(moveCount).score;
         setTimeout(function () {
             endGame(moveCount, score);
@@ -311,17 +309,22 @@ Help me to find my buddies! `,
 
 /* *** *** END GAME MODAL *** *** */
 
-function endGame(moveCount, score) {
+function endGame() {
     stopTimer(timer);
-    let currentTime = minutes + ":" + seconds;
+    let finalMoves = document.querySelector(".moves").innerHTML;
+    let finalMin = document.querySelector(".minutes").innerHTML;
+    let finalSec = document.querySelector(".seconds").innerHTML;
+    let finalTime = finalMin + " min" + " : " + finalSec + " s";
+    let finalRating = document.getElementsByClassName("fa-star").length;
+
     swal({
         closeOnEsc: true,
         closeOnClickOutside: true,
         title: "You Won!",
         text: `Here's how you did!
-                Moves:  ${moveCount}
-                Time : ${currentTime}
-                Game rating : ${score}`,
+                Moves:  ${finalMoves}
+                Time : ${finalTime}
+                Game rating : ${finalRating}`,
         className: "swal-endgame",
         button: {
             playAgain: {
@@ -333,7 +336,7 @@ function endGame(moveCount, score) {
             resetStarRating();
             openCards = [];
             shuffle(cards);
-            flip(clicked);
+            flip();
         }
     })
 }
