@@ -87,7 +87,7 @@ const card = document.querySelectorAll(".card"); // card element
 
 let openCards = []; //array which holds open cards
 let pairs = []; //counts matched pairs - > game finished when all 15 pairs are matched
-const pairedCards = pairs.length / 2
+let matches = 0;
 
 
 
@@ -136,33 +136,14 @@ function flip(clicked) {
     if (openCards.length == 2) {
         deck.removeEventListener('click', flip); // to stop from further clicking on cards until animation is finished
         checkMatch(openCards[0], openCards[1]);
+        matches++;
     }
 
-    if (pairedCards == 15) {
+    if (matches === 15) {
         let score = starRating(moveCount).score;
-        stopTimer(timer);
-
-        swal({
-            closeOnEsc: true,
-            closeOnClickOutside: true,
-            title: "Game Won!",
-            text: `Moves:  ${movesCount}
-                Game rating : ${score}
-                Time : ${minutes} : ${seconds}`,
-            icon: "success",
-            button: {
-                playAgain: {
-                    text: "Play again?"
-                }
-            },
-        }).then(function (isConfirm) {
-            if (isConfirm) {
-                resetStarRating();
-                openCards = [];
-                shuffle(cards);
-                flip(clicked);
-            }
-        })
+        setTimeout(function () {
+            endGame(moveCount, score);
+        }, 500);
     }
 }
 
@@ -179,6 +160,7 @@ function checkMatch(a, b) {
             pairs.push(openCards[0]);
             pairs.push(openCards[1]);
             countPairs();
+
         } else {
             openCards[0].classList.remove("open", "show");
             openCards[1].classList.remove("open", "show");
@@ -241,7 +223,6 @@ function pauseTimer() {
                 closeOnEsc: true,
                 closeOnClickOutside: true,
                 title: "GAME PAUSED!",
-                icon: "url(http://res.cloudinary.com/duc8x03hq/image/upload/v1524083275/bear-rotating_u0ft3z.gif)"
             });
             return;
         }
@@ -332,14 +313,14 @@ Help me to find my buddies! `,
 
 function endGame(moveCount, score) {
     stopTimer(timer);
-
+    let currentTime = minutes + ":" + seconds;
     swal({
         closeOnEsc: true,
         closeOnClickOutside: true,
         title: "Game Won!",
-        text: `Moves:  ${movesCount}
+        text: `Moves:  ${moveCount}
                 Game rating : ${score}
-                Time : ${minutes} : ${seconds}`,
+                Time : ${currentTime}`,
         icon: "success",
         button: {
             playAgain: {
