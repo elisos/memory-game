@@ -2,6 +2,9 @@
 
 A browser-based card matching game inteded for kids. Goal is to find all 15 matches as quickly as possible. Game will be rated on number of moves player takes to discover all matches.
 
+## Play!
+Link to the game: https://ozana-buljan.github.io/memory-game/
+
 ## How it works?
 
 * The player flips first card over to reveal its underlying image.
