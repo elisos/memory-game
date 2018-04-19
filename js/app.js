@@ -222,7 +222,7 @@ function pauseTimer() {
             swal({
                 closeOnEsc: true,
                 closeOnClickOutside: true,
-                title: "Game Paused!",
+                title: "GAME PAUSED!",
             });
             return;
         }
@@ -317,12 +317,11 @@ function endGame(moveCount, score) {
     swal({
         closeOnEsc: true,
         closeOnClickOutside: true,
-        title: "You Won!",
-        text: `Here's how you did!
-                Moves:  ${moveCount}
-                Time : ${currentTime}
-                Game rating : ${score}`,
-        className: "swal-endgame",
+        title: "Game Won!",
+        text: `Moves:  ${moveCount}
+                Game rating : ${score}
+                Time : ${currentTime}`,
+        icon: "success",
         button: {
             playAgain: {
                 text: "Play again?"
@@ -347,7 +346,7 @@ function restartGame() {
     swal({
         closeOnEsc: true,
         closeOnClickOutside: true,
-        title: "Do you want to start over?",
+        title: "Do you want to start over ?",
         text: "Your progress will be lost!",
         dangerMode: true,
         className: "swal-restart",
@@ -371,10 +370,6 @@ pause.addEventListener("click", pauseTimer);
 
 // Event listener -> on click on restart button ->restart the game
 restart.addEventListener("click", restartGame);
-
-// TEST engame
-test.addEventListener("click", endGame);
-
 
 /* *** *** *** Instructions *** *** *** */
 

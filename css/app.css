@@ -267,7 +267,6 @@ img {
     text-align: center;
 }
 
-#test,
 #pause,
 #restart {
     height: 48px;
@@ -350,8 +349,7 @@ footer {
 
 .swal-greetings,
 .swal-restart,
-.swal-pause,
-.swal-endgame {
+.swal-pause {
     width: 660 px;
     background-repeat: no-repeat;
     background-size: contain;
@@ -363,23 +361,12 @@ footer {
     background-image: url('../img/modal-background-animals.svg');
 }
 
-.swal-restart,
-.swal-endgame {
+.swal-restart {
     background-image: url('../img/modal-background.svg');
 }
 
 .swal-pause {
     background-image: url('../img/bear-rotating.gif'), url('../img/modal-background.svg');
-}
-
-.swal-endgame > .swal-title {
-    font-size: 20px;
-}
-
-.swal-endgame > .swal-text {
-    margin-bottom: 0;
-    font-size: 12px;
-    padding: 1em;
 }
 
 /***--- --- --- ANIMATIONS --- --- ---***/
