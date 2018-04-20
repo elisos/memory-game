@@ -84,10 +84,10 @@ const cards = cardsUnique
 
 const deck = document.querySelector('.deck'); //element which contains all cards
 const card = document.querySelectorAll(".card"); // card element
-
-let openCards = []; //array which holds open cards
 let pairs = []; //counts matched pairs - > game finished when all 15 pairs are matched
-let pairedCards = document.getElementsByClassName('card match open show');
+let openCards = []; //array which holds open cards
+let pairedCards = document.getElementsByClassName("card open show match");
+let matches = 0;
 
 
 /* *** *** *** *** *** FUNCTIONS *** *** *** *** *** */
@@ -108,7 +108,7 @@ function shuffle(array) {
     createDeck();
     return array;
 }
-shuffle(cards);
+//shuffle(cards);
 
 /* *** *** CREATE DECK *** *** */
 
@@ -137,11 +137,8 @@ function flip(clicked) {
         checkMatch(openCards[0], openCards[1]);
     }
 
-    if (pairedCards.length == 30) {
-        let score = starRating(moveCount).score;
-        setTimeout(function () {
-            endGame(moveCount, score);
-        }, 500);
+    if (matches === 15) {
+        endGame();
     }
 }
 
@@ -158,7 +155,7 @@ function checkMatch(a, b) {
             pairs.push(openCards[0]);
             pairs.push(openCards[1]);
             countPairs();
-
+            matches++;
         } else {
             openCards[0].classList.remove("open", "show");
             openCards[1].classList.remove("open", "show");
@@ -176,6 +173,7 @@ function removeMatch() {
     for (i = 0; i < cards.length; i++) {
         card[i].classList.remove("open", "show", "match");
     }
+    matches = 0;
 }
 
 
@@ -359,8 +357,10 @@ function restartGame() {
         if (isConfirm) {
             resetStarRating();
             openCards = [];
+            removeMatch();
+            matches = 0;
             shuffle(cards);
-            flip();
+            flip(clicked);
         }
     })
 }
