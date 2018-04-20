@@ -324,17 +324,15 @@ function endGame() {
                 Time : ${finalTime}
                 Game rating : ${finalRating}`,
         className: "swal-endgame",
-        button: {
-            playAgain: {
-                text: "Play again?"
-            }
-        },
+        button: "PLAY AGAIN"
     }).then(function (isConfirm) {
         if (isConfirm) {
             resetStarRating();
             openCards = [];
+            removeMatch();
+            matches = 0;
             shuffle(cards);
-            flip();
+            flip(clicked);
         }
     })
 }
