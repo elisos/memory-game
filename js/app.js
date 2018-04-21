@@ -373,8 +373,6 @@ pause.addEventListener("click", pauseTimer);
 // Event listener -> on click on restart button ->restart the game
 restart.addEventListener("click", restartGame);
 
-// TEST engame
-test.addEventListener("click", endGame);
 
 
 /* *** *** *** Instructions *** *** *** */
