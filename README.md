@@ -26,16 +26,16 @@ Link to the game: https://ozana-buljan.github.io/memory-game/
 * Make game looking good and working on phones! This is the most important one!
 
 * Add different levels for the game:
-    -Easy -> 9 pairs
-    -Medium -> 12 pairs
-    -Hard -> 15 pairs
+    - Easy -> 9 pairs
+    - Medium -> 12 pairs
+    - Hard -> 15 pairs
     - adjust the number of moves to correspond with difficulty
 * Add more themes
-    -Farm animals
-    -Mountain & forrest
-    -Ocean
-    -Birds
-    -I have graphics ready - just  need to write the code
+    - Farm animals
+    - Mountain & forrest
+    - Ocean
+    - Birds
+    - I have graphics ready - just  need to write the code
 * LeaderBoard - this could be a cool feature which could add a sense of purpose to the game.
     - leaderboard should prompt player to enter their name
     - Ranking takes in consideration number of moves and time
@@ -63,7 +63,7 @@ Vectors
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-* This project was inspired by my daughter. And she's also a reason why it took forever to finish! Attempting to do programming while keeping an eye on a toddler is not - well, ideal - to put it mildly. But she's very happy that mommy made her a game; with animals - as per request!
+* This project was inspired by my daughter. And she's also a reason why it took forever to finish! Attempting to do programming while keeping an eye on a toddler is not - well, ideal - to put it mildly. On the bright side, she's very happy that mommy made her a game; with animals - as per request!
 
 * I want  to thank to Udacity, my mentor and my classmates for being an amazing support in times when I felt like banging my head to a wall because code wouldn't work! Y'all are the best!
 

@@ -341,9 +341,9 @@ function endGame() {
         closeOnClickOutside: true,
         title: "You Won!",
         text: `Here's how you did!
-                Moves:  ${finalMoves}
-                Time : ${finalTime}
-                Game rating : ${finalRating} / 3`,
+                Moves｜${finalMoves}
+                Time｜${finalTime}
+                Game rating｜${finalRating} / 3`,
         className: "swal-endgame",
         button: "PLAY AGAIN"
     }).then(function (isConfirm) {
