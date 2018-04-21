@@ -185,7 +185,7 @@ const pause = document.getElementById("pause");
 let paused = 0;
 let stopped = 0;
 let timer;
-let totalTime = 0;
+
 
 function startTimer() {
     timer = setInterval(function () {
@@ -241,7 +241,6 @@ function pauseTimer() {
 
 
 
-
 /* *** *** STAR RATING & MOVE COUNTER *** *** */
 
 const moves = document.querySelector(".moves"); // span elemet which displays number of moves
@@ -289,6 +288,22 @@ function countPairs() {
     pairsNo.innerText = pairsCount;
 }
 
+/* *** *** NEW GAME *** *** */
+function newGame() {
+    resetStarRating();
+    seconds.innerText = 0;
+    minutes.innerText = 0;
+    openCards = [];
+    pairs = [];
+    pairsNo.innerText = 0;
+    moveCount = 0;
+    moves.innerText = 0;
+    removeMatch();
+    shuffle(cards);
+    flip();
+}
+
+
 /* *** *** *** *** *** MODALS *** *** *** *** *** */
 
 /* *** *** GREETINGS MODAL *** *** */
@@ -327,12 +342,7 @@ function endGame() {
         button: "PLAY AGAIN"
     }).then(function (isConfirm) {
         if (isConfirm) {
-            resetStarRating();
-            openCards = [];
-            removeMatch();
-            matches = 0;
-            shuffle(cards);
-            flip();
+            newGame();
         }
     })
 }
@@ -353,12 +363,7 @@ function restartGame() {
         buttons: true
     }).then(function (isConfirm) {
         if (isConfirm) {
-            resetStarRating();
-            openCards = [];
-            removeMatch();
-            matches = 0;
-            shuffle(cards);
-            flip();
+            newGame();
         }
     })
 }
