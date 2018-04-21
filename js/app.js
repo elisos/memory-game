@@ -223,11 +223,11 @@ function pauseTimer() {
             }).then(function (isConfirm) {
                 if (isConfirm) {
                     startTimer();
-                document.getElementById("pause").innerHTML = '<i class="fa fa-pause"></i>';
+                    document.getElementById("pause").innerHTML = '<i class="fa fa-pause"></i>';
                     paused = 0;
                     deck.addEventListener('click', flip);
                     for (let i = 0; i < card.length; i++) {
-                     card[i].classList.remove("disabled");
+                        card[i].classList.remove("disabled");
                     }
 
                     return;
@@ -236,8 +236,19 @@ function pauseTimer() {
 
             return;
         }
-
     }
+    if (paused == 1) {
+        startTimer();
+        document.getElementById("pause").innerHTML = '<i class="fa fa-pause"></i>';
+        paused = 0;
+        deck.addEventListener('click', flip);
+        for (let i = 0; i < card.length; i++) {
+            card[i].classList.remove("disabled");
+        }
+        return;
+    }
+    return;
+
 }
 
 
