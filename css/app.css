@@ -148,7 +148,7 @@ img {
     pointer-events: none;
     border-radius: 10px;
     !important;
-    animation-name: pulse;
+    animation-name: rubberBand;
     -webkit-backface-visibility: visible !important;
     backface-visibility: visible !important;
     animation-duration: .75s;
@@ -414,27 +414,11 @@ footer {
     }
 }
 
-@keyframes pulse {
-    from {
-        transform: scale3d(1, 1, 1);
-    }
-
-    50% {
-        transform: scale3d(1.2, 1.2, 1.2);
-    }
-
-    to {
-        transform: scale3d(1, 1, 1);
-    }
-}
-
-
-
 /***--- --- --- RESPONSIVENESS --- --- ---***/
 
 /***--- ---NARROW PHONE --- ---***/
 
-@media only screen and (max-width: 321px) {
+@media only screen and (max-width: 325px) {
     .body {
         background-image: url("../img/background%20gradient.svg");
         background-repeat: no-repeat;
@@ -581,3 +565,7 @@ footer {
     }
 
 }
+
+
+
+/*-------------THE ᕕ( ᐛ )ᕗ END-----------------*/

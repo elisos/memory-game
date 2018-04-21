@@ -108,7 +108,7 @@ function shuffle(array) {
     createDeck();
     return array;
 }
-//shuffle(cards);
+shuffle(cards);
 
 /* *** *** CREATE DECK *** *** */
 
@@ -218,27 +218,27 @@ function pauseTimer() {
                 closeOnEsc: true,
                 closeOnClickOutside: true,
                 title: "Game Paused!",
-                html: '<img src="bear-rotating.gif" alt="Bear loader" height="42" width="42">'
+                button: "CONTINUE",
+                html: '<img src="bear-rotating.gif" alt="Bear loader" height="50px" width="50px">'
+            }).then(function (isConfirm) {
+                if (isConfirm) {
+                    startTimer();
+                document.getElementById("pause").innerHTML = '<i class="fa fa-pause"></i>';
+                    paused = 0;
+                    deck.addEventListener('click', flip);
+                    for (let i = 0; i < card.length; i++) {
+                     card[i].classList.remove("disabled");
+                    }
+
+                    return;
+                }
             });
-            return;
-        }
-        //resume
-        if (paused == 1) {
-            startTimer();
-            document.getElementById("pause").innerHTML = '<i class="fa fa-pause"></i>';
-            paused = 0;
-            deck.addEventListener('click', flip);
-            for (let i = 0; i < card.length; i++) {
-                card[i].classList.remove("disabled");
-            }
 
             return;
         }
-        return;
+
     }
-
 }
-
 
 
 /* *** *** STAR RATING & MOVE COUNTER *** *** */
@@ -291,14 +291,20 @@ function countPairs() {
 /* *** *** NEW GAME *** *** */
 function newGame() {
     resetStarRating();
+    //reset timer
     seconds.innerText = 0;
     minutes.innerText = 0;
+    //reset open cards
     openCards = [];
+    //reset pairs
     pairs = [];
     pairsNo.innerText = 0;
+    //reset moves
     moveCount = 0;
     moves.innerText = 0;
+    //remove previous matches
     removeMatch();
+    //play
     shuffle(cards);
     flip();
 }
@@ -379,33 +385,4 @@ pause.addEventListener("click", pauseTimer);
 restart.addEventListener("click", restartGame);
 
 
-
-/* *** *** *** Instructions *** *** *** */
-
-
-/* Create a list that holds all of your cards*/
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
-
- function showCard(){}
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-function addCardtoOpen(){}
-
- *  - if the list already has another card, check to see if the two cards match
- function checkIfMatch(){}
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- function matched(){}
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- function unmatched(){}
-
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- function countMoves(){}
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-function endGame{}
-
-function openModal{}
-
-*/
+/*-------------THE ᕕ( ᐛ )ᕗ END-----------------*/
