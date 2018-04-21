@@ -219,7 +219,7 @@ function pauseTimer() {
                 closeOnClickOutside: true,
                 title: "Game Paused!",
                 button: "CONTINUE",
-                html: '<img src="bear-rotating.gif" alt="Bear loader" height="50px" width="50px">'
+                content: '<img src="bear-rotating.gif" alt="Bear loader" height="50px" width="50px">'
             }).then(function (isConfirm) {
                 if (isConfirm) {
                     startTimer();
@@ -229,8 +229,6 @@ function pauseTimer() {
                     for (let i = 0; i < card.length; i++) {
                         card[i].classList.remove("disabled");
                     }
-
-                    return;
                 }
             });
 
@@ -238,17 +236,14 @@ function pauseTimer() {
         }
     }
     if (paused == 1) {
-        startTimer();
         document.getElementById("pause").innerHTML = '<i class="fa fa-pause"></i>';
         paused = 0;
         deck.addEventListener('click', flip);
         for (let i = 0; i < card.length; i++) {
             card[i].classList.remove("disabled");
         }
-        return;
     }
     return;
-
 }
 
 
@@ -305,6 +300,8 @@ function newGame() {
     //reset timer
     seconds.innerText = 0;
     minutes.innerText = 0;
+    paused = 0;
+    stopped = 0;
     //reset open cards
     openCards = [];
     //reset pairs
@@ -318,6 +315,7 @@ function newGame() {
     //play
     shuffle(cards);
     flip();
+    pause.addEventListener("click", pauseTimer);
 }
 
 
@@ -370,6 +368,7 @@ let restart = document.getElementById("restart");
 
 
 function restartGame() {
+
     swal({
         closeOnEsc: true,
         closeOnClickOutside: true,
