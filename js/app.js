@@ -1,4 +1,4 @@
-/* *** *** *** *** *** VARIABLES *** *** *** *** *** */
+/* *** *** *** *** *** DECLARATIONS *** *** *** *** *** */
 const cardsUnique = [
     {
         id: 1,
@@ -137,9 +137,6 @@ function flip(clicked) {
         checkMatch(openCards[0], openCards[1]);
     }
 
-    if (matches === 15) {
-        endGame();
-    }
 }
 
 
@@ -155,7 +152,9 @@ function checkMatch(a, b) {
             pairs.push(openCards[0]);
             pairs.push(openCards[1]);
             countPairs();
-            matches++;
+            if (++matches == 15) {
+                setTimeout(endGame(), 500);
+            }
         } else {
             openCards[0].classList.remove("open", "show");
             openCards[1].classList.remove("open", "show");
@@ -219,6 +218,7 @@ function pauseTimer() {
                 closeOnEsc: true,
                 closeOnClickOutside: true,
                 title: "Game Paused!",
+                html: '<img src="bear-rotating.gif" alt="Bear loader" height="42" width="42">'
             });
             return;
         }
@@ -322,7 +322,7 @@ function endGame() {
         text: `Here's how you did!
                 Moves:  ${finalMoves}
                 Time : ${finalTime}
-                Game rating : ${finalRating}`,
+                Game rating : ${finalRating} / 3`,
         className: "swal-endgame",
         button: "PLAY AGAIN"
     }).then(function (isConfirm) {
@@ -332,7 +332,7 @@ function endGame() {
             removeMatch();
             matches = 0;
             shuffle(cards);
-            flip(clicked);
+            flip();
         }
     })
 }
@@ -358,7 +358,7 @@ function restartGame() {
             removeMatch();
             matches = 0;
             shuffle(cards);
-            flip(clicked);
+            flip();
         }
     })
 }
