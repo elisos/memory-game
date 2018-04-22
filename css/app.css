@@ -121,7 +121,12 @@ img {
     align-items: center;
     position: relative;
     transition: all .4s linear;
+    -webkit-transition: all .4s linear;
+    -moz-transition: all .4s linear;
+    -ms-transition: all .4s linear;
+    -o-transition: all .4s linear;
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
 }
 
 
@@ -131,11 +136,19 @@ img {
 
 .deck .card.show img {
     transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
     visibility: visible;
 }
 
 .open {
     transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
     background: #b5e0d9;
     cursor: default;
     background-size: contain;
@@ -673,7 +686,7 @@ footer {
 
 /***--- ---TABLET --- ---***/
 
-@media screen and (min-width: 600px) and (max-width: 992px) {
+@media screen and (min-width: 600px) and (max-width: 740px) {
 
     .wrapper {
         margin: 0;

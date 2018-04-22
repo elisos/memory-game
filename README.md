@@ -25,6 +25,8 @@ Link to the game: https://ozana-buljan.github.io/memory-game/
 ## To Do
 * Make game looking good and working on phones! This is the most important one!
 
+*Implement ARIA.
+
 * Add different levels for the game:
     - Easy -> 9 pairs
     - Medium -> 12 pairs
