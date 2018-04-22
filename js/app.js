@@ -263,11 +263,11 @@ function starRating() {
     }
     //rate game based on move count
     let rating = 3;
-    if (moveCount == 20) {
+    if (moveCount == 25) {
         star[2].classList.remove("fa-star");
         star[2].classList.add("fa-star-o");
         rating = 2;
-    } else if (moveCount == 30) {
+    } else if (moveCount == 35) {
         star[1].classList.remove("fa-star");
         star[1].classList.add("fa-star-o");
         rating = 1;
@@ -364,8 +364,6 @@ function endGame() {
 
 /* *** *** RESTART GAME *** *** */
 let restart = document.getElementById("restart");
-
-
 
 function restartGame() {
 
